@@ -1,0 +1,30 @@
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "aegisai"
+version = "0.1.0"
+description = "Open-source AI security gateway for LLM, RAG, and agentic AI applications."
+readme = "README.md"
+requires-python = ">=3.13"
+license = "Apache-2.0"
+authors = [
+    { name = "Badathala Jaisurya" }
+]
+dependencies = [
+    "fastapi",
+    "uvicorn",
+    "pydantic"
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest"
+]
+
+[tool.setuptools.packages.find]
+include = ["app*"]
+
+[project.scripts]
+aegis = "app.cli:main"
