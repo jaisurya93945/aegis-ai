@@ -12,10 +12,11 @@ class AegisEngine:
         )
 
     def analyze(self, text: str) -> list[SecurityFinding]:
-        """Run every registered detector against the input."""
+        """Run every registered detector and collect their findings."""
         findings: list[SecurityFinding] = []
 
         for detector in self.detectors:
-            findings.extend(detector.detect(text))
+            result = detector.detect(text)
+            findings.extend(result.findings)
 
         return findings

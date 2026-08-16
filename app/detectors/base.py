@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod
 
-from app.models.findings import SecurityFinding
+from app.models.results import DetectorResult
 
 
 class Detector(ABC):
@@ -9,6 +9,6 @@ class Detector(ABC):
     name: str = "base"
 
     @abstractmethod
-    def detect(self, text: str) -> list[SecurityFinding]:
-        """Analyze text and return security findings."""
+    def detect(self, text: str) -> DetectorResult:
+        """Analyze text and return a structured detector result."""
         raise NotImplementedError

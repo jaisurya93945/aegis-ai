@@ -4,6 +4,7 @@ from app.models.findings import (
     SecurityFinding,
     Severity,
 )
+from app.models.results import DetectorResult
 
 
 class PromptInjectionDetector(Detector):
@@ -20,7 +21,7 @@ class PromptInjectionDetector(Detector):
         "override previous instructions",
     )
 
-    def detect(self, text: str) -> list[SecurityFinding]:
+    def detect(self, text: str) -> DetectorResult:
         normalized = text.casefold()
 
         matches = [
@@ -30,13 +31,16 @@ class PromptInjectionDetector(Detector):
         ]
 
         if not matches:
-            return []
+            return DetectorResult(detector=self.name)
 
-        return [
-            SecurityFinding(
-                type=FindingType.PROMPT_INJECTION,
-                severity=Severity.HIGH,
-                description="Potential prompt injection indicator detected.",
-                evidence=matches[0],
-            )
-        ]
+        finding = SecurityFinding(
+            type=FindingType.PROMPT_INJECTION,
+            severity=Severity.HIGH,
+            description="Potential prompt injection indicator detected.",
+            evidence=matches[0],
+        )
+
+        return DetectorResult(
+            detector=self.name,
+            findings=[finding],
+        )
