@@ -20,9 +20,9 @@ def test_engine_runs_registered_detectors():
 
     assert len(analysis.findings) == 1
     assert analysis.findings[0].type == FindingType.PROMPT_INJECTION
-    assert analysis.risk_score == 0
-    assert analysis.severity == Severity.LOW
-    assert analysis.decision == Decision.ALLOW
+    assert analysis.risk_score == 70
+    assert analysis.severity == Severity.HIGH
+    assert analysis.decision == Decision.BLOCK
 
 
 def test_engine_returns_no_findings_for_benign_input():
