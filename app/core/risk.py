@@ -1,8 +1,4 @@
-from app.models.findings import (
-    Decision,
-    SecurityFinding,
-    Severity,
-)
+from app.models.findings import SecurityFinding, Severity
 
 
 class RiskEngine:
@@ -43,16 +39,3 @@ class RiskEngine:
             findings,
             key=lambda finding: severity_order[finding.severity],
         ).severity
-
-    def calculate_decision(self, findings: list[SecurityFinding]) -> Decision:
-        """Return a baseline security decision."""
-
-        if not findings:
-            return Decision.ALLOW
-
-        severity = self.calculate_severity(findings)
-
-        if severity in {Severity.HIGH, Severity.CRITICAL}:
-            return Decision.BLOCK
-
-        return Decision.WARN
