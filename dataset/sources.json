@@ -1,0 +1,22 @@
+{
+  "datasets": [
+    {
+      "name": "neuralchemy_prompt_injection",
+      "source": "https://huggingface.co/datasets/neuralchemy/Prompt-injection-dataset",
+      "provider": "Hugging Face",
+      "role": "primary_prompt_injection_dataset"
+    },
+    {
+      "name": "hlyn_prompt_injection",
+      "source": "https://huggingface.co/datasets/hlyn-labs/prompt-injection-judge-deberta-dataset",
+      "provider": "Hugging Face",
+      "role": "large_scale_external_dataset"
+    },
+    {
+      "name": "nvidia_nemotron_agentic_ipi",
+      "source": "https://huggingface.co/datasets/nvidia/Nemotron-RL-Agentic-Indirect-Prompt-Injection-v1",
+      "provider": "Hugging Face",
+      "role": "agentic_indirect_injection_evaluation"
+    }
+  ]
+}
