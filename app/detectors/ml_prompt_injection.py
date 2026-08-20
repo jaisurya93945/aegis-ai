@@ -6,6 +6,7 @@ from app.ml.baseline import (
 )
 from app.models.findings import (
     FindingType,
+    FindingSource,
     SecurityFinding,
     Severity,
 )
@@ -36,10 +37,18 @@ class MLPromptInjectionDetector(Detector):
         findings: list[SecurityFinding] = []
 
         if prediction == 1:
+            if probability >= 0.90:
+                severity = Severity.HIGH
+            elif probability >= 0.70:
+                severity = Severity.MEDIUM
+            else:
+                severity = Severity.LOW
+
             findings.append(
                 SecurityFinding(
                     type=FindingType.PROMPT_INJECTION,
-                    severity=Severity.HIGH,
+                    severity=severity,
+                    source=FindingSource.ML,
                     description=(
                         "ML detector identified the input as a likely "
                         "prompt injection."
@@ -49,6 +58,6 @@ class MLPromptInjectionDetector(Detector):
             )
 
         return DetectorResult(
-    detector=self.name,
-    findings=findings,
-)
+            detector=self.name,
+            findings=findings,
+        )

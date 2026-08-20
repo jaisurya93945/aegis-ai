@@ -30,11 +30,19 @@ class FindingType(str, Enum):
     OBFUSCATION = "obfuscation"
 
 
+class FindingSource(str, Enum):
+    """Source of a security finding."""
+
+    RULE = "rule"
+    ML = "ml"
+
+
 class SecurityFinding(BaseModel):
     """A single security finding produced by a detector."""
 
     type: FindingType
     severity: Severity
+    source: FindingSource = FindingSource.RULE
     description: str = Field(min_length=1)
     evidence: str | None = None
 
