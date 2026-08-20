@@ -1,5 +1,6 @@
 from app.detectors.base import Detector
 from app.detectors.extraction import SystemPromptExtractionDetector
+from app.detectors.ml_prompt_injection import MLPromptInjectionDetector
 from app.detectors.prompt_injection import PromptInjectionDetector
 
 
@@ -8,4 +9,5 @@ def get_default_detectors() -> list[Detector]:
     return [
         PromptInjectionDetector(),
         SystemPromptExtractionDetector(),
+        MLPromptInjectionDetector(),
     ]

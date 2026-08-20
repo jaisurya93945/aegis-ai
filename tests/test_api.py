@@ -28,7 +28,11 @@ def test_analyze_endpoint_detects_prompt_injection():
     assert data["risk_score"] == 70
     assert data["severity"] == "high"
     assert data["decision"] == "block"
-    assert len(data["findings"]) == 2
+    assert len(data["findings"]) == 3
+    assert any(
+    finding["evidence"].startswith("ml_probability=")
+    for finding in data["findings"]
+)
 
 
 def test_analyze_endpoint_allows_benign_input():
