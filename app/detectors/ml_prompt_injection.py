@@ -1,3 +1,5 @@
+from pathlib import Path
+
 from app.detectors.base import Detector
 from app.ml.baseline import (
     DEFAULT_THRESHOLD,
@@ -13,14 +15,22 @@ from app.models.findings import (
 from app.models.results import DetectorResult
 
 
+V2_MODEL_PATH = Path("models/aegisai_tfidf_v2.joblib")
+
+
 class MLPromptInjectionDetector(Detector):
-    """Detect prompt injection using the trained ML baseline."""
+    """Detect prompt injection using the trained AegisAI ML model."""
 
     name = "ml_prompt_injection"
 
-    def __init__(self, threshold: float = DEFAULT_THRESHOLD) -> None:
+    def __init__(
+        self,
+        threshold: float = DEFAULT_THRESHOLD,
+        model_path: Path = V2_MODEL_PATH,
+    ) -> None:
         self.threshold = threshold
-        self.model = load_model()
+        self.model_path = model_path
+        self.model = load_model(model_path)
 
     def detect(self, text: str) -> DetectorResult:
         """Analyze text using the trained ML classifier."""
