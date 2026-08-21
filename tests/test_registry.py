@@ -6,7 +6,7 @@ from app.detectors.ml_prompt_injection import MLPromptInjectionDetector
 def test_default_detectors_are_registered():
     detectors = get_default_detectors()
 
-    assert len(detectors) == 3
+    assert len(detectors) == 4
     assert isinstance(detectors[0], PromptInjectionDetector)
     assert isinstance(detectors[1], SystemPromptExtractionDetector)
     assert any(isinstance(d, MLPromptInjectionDetector) for d in detectors)

@@ -2,7 +2,7 @@ from app.detectors.base import Detector
 from app.detectors.extraction import SystemPromptExtractionDetector
 from app.detectors.ml_prompt_injection import MLPromptInjectionDetector
 from app.detectors.prompt_injection import PromptInjectionDetector
-
+from app.detectors.jailbreak import JailbreakDetector
 
 def get_default_detectors() -> list[Detector]:
     """Return the detectors enabled by default."""
@@ -10,4 +10,5 @@ def get_default_detectors() -> list[Detector]:
         PromptInjectionDetector(),
         SystemPromptExtractionDetector(),
         MLPromptInjectionDetector(),
+        JailbreakDetector(),
     ]
